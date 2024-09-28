@@ -1,0 +1,104 @@
+[
+    {
+        "id": 1,
+        "customer_name": "Maximo Dip",
+        "products": [
+            {
+                "product_name": "Ibuprofeno",
+                "product_price": 4999.99
+            },
+            {
+                "product_name": "Aspirina",
+                "product_price": 4999.99
+            }
+        ],
+        "total": 9999.99,
+        "created_date": "19-06-2024",
+        "status": "al dia"
+    },
+    {
+        "id": 2,
+        "customer_name": "Amanda Smith",
+        "products": [
+            {
+                "product_name": "Paracetamol",
+                "product_price": 2999.99
+            },
+            {
+                "product_name": "Vitamin C",
+                "product_price": 1999.99
+            }
+        ],
+        "total": 4999.98,
+        "created_date": "19-06-2024",
+        "status": "pendiente"
+    },
+    {
+        "id": 3,
+        "customer_name": "John Doe",
+        "products": [
+            {
+                "product_name": "Antibiotic",
+                "product_price": 6999.99
+            },
+            {
+                "product_name": "Cough Syrup",
+                "product_price": 2999.99
+            }
+        ],
+        "total": 9999.98,
+        "created_date": "19-06-2024",
+        "status": "pendiente"
+    },
+    {
+        "id": 4,
+        "customer_name": "Luna Park",
+        "products": [
+            {
+                "product_name": "Ibuprofen",
+                "product_price": 4999.99
+            },
+            {
+                "product_name": "Nasal Spray",
+                "product_price": 4999.99
+            }
+        ],
+        "total": 9999.98,
+        "created_date": "19-06-2024",
+        "status": "al dia"
+    },
+    {
+        "id": 5,
+        "customer_name": "Carlos Ruiz",
+        "products": [
+            {
+                "product_name": "Pain Reliever",
+                "product_price": 5499.99
+            },
+            {
+                "product_name": "Antacid",
+                "product_price": 4500.00
+            }
+        ],
+        "total": 9999.99,
+        "created_date": "19-06-2024",
+        "status": "al dia"
+    },
+    {
+        "id": 6,
+        "customer_name": "Sophia Lee",
+        "products": [
+            {
+                "product_name": "Allergy Medication",
+                "product_price": 3999.99
+            },
+            {
+                "product_name": "Cold Medicine",
+                "product_price": 5999.99
+            }
+        ],
+        "total": 9999.98,
+        "created_date": "19-06-2024",
+        "status": "pendiente"
+    }
+]

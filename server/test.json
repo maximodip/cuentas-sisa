@@ -1,0 +1,13 @@
+{
+  "customer_name": "",
+  "products": {
+    "product_name": "",
+    "product_price": "",
+    "quantity": ""
+  },
+  "status": ["payed", "pending"],
+  "total": "",
+  "createdAt": ""
+}
+
+
