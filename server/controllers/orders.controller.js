@@ -162,7 +162,7 @@ export const deleteOrder = async (req, res) => {
   try {
     await pool.query('DELETE FROM customers_orders WHERE id=?', [id])
 
-    res.status(200).json({ message: 'Cuenta eliminada correctamente' })
+    res.status(200).json({ message: 'Cuenta eliminada' })
   } catch (error) {
     console.error('Error deleting order:', error)
     res.status(500).json({ error: 'Failed to delete order' })

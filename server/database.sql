@@ -11,7 +11,7 @@ CREATE TABLE
      customers_orders (
           id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
           customer_name VARCHAR(255) NOT NULL,
-          status VARCHAR(10),
+          status VARCHAR(10) DEFAULT 'pendiente',
           total DECIMAL(10, 2) DEFAULT 0, -- Default to 0, will be updated via trigger or application logic
           created_date DATE
      );

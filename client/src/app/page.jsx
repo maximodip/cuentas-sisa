@@ -12,6 +12,7 @@ export default function Home() {
   const [orders, setOrders] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredData, setFilteredData] = useState([])
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -19,10 +20,12 @@ export default function Home() {
   }, [])
 
   const fetchOrders = async () => {
+    setLoading(true)
     try {
       const response = await axios.get('http://localhost:8000/orders') // Adjust the URL to match your backend endpoint
       setOrders(response.data)
       setFilteredData(response.data)
+      setLoading(false)
     } catch (error) {
       setError('Failed to fetch orders')
     }
@@ -67,18 +70,19 @@ export default function Home() {
       <div className='w-full mb-8'>
         <SearchInput value={searchTerm} onChange={handleSearch} />
       </div>
-      <div className='grid grid-cols-2 gap-12 md:grid-cols-3 xl:grid-cols-4'>
+      <div className='grid grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-3 xl:grid-cols-4'>
+        {loading && <p>Cargando...</p>}
+
         {filteredData.map((order, index) => (
-          <div key={index} className='text-xl'>
-            <h2 className='text-2xl font-semibold'>{order.customer_name}</h2>
+          <div key={index} className='text-balance flex flex-col overflow-hidden'>
+            <h2 className='text-xl font-semibold'>{order.customer_name}</h2>
             <p>
               Estado:
               <span
-                className={`${
-                  order.status === 'pagado'
-                    ? 'text-green-500 font-semibold opacity-50'
-                    : 'text-yellow-500'
-                }`}
+                className={`${order.status === 'pagado'
+                  ? 'text-green-500 font-semibold opacity-50'
+                  : 'text-yellow-500'
+                  }`}
               >
                 {' '}
                 {order.status}
