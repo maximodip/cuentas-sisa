@@ -1,4 +1,6 @@
-import { Trash, PlusIcon } from 'lucide-react'
+import { Trash } from 'lucide-react'
+import { useContext } from 'react'
+import { OrderProvider } from '@/context/OrderContext'
 
 export default function ProductField({
     index,
@@ -11,6 +13,8 @@ export default function ProductField({
     errors,
     remove,
 }) {
+    const { removeProduct } = OrderProvider
+
     const handleQuantityChange = (index, delta) => {
         const newQuantities = [...quantities]
         newQuantities[index] = Math.max(1, (newQuantities[index] || 1) + delta)
@@ -70,7 +74,7 @@ export default function ProductField({
 
             <button
                 type="button"
-                onClick={() => remove(index)}
+                onClick={() => removeProduct(index)}
                 className="text-red-600 hover:text-red-800 focus:outline-none"
             >
                 <Trash className="w-5 h-5" />
