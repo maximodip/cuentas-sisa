@@ -1,27 +1,16 @@
 import { Trash } from 'lucide-react'
-import { useContext } from 'react'
-import { OrderProvider } from '@/context/OrderContext'
 
 export default function ProductField({
     index,
     product,
     products,
-    quantities,
-    setQuantities,
+    quantity,
+    handleQuantityChange,
     register,
     setValue,
     errors,
     remove,
 }) {
-    const { removeProduct } = OrderProvider
-
-    const handleQuantityChange = (index, delta) => {
-        const newQuantities = [...quantities]
-        newQuantities[index] = Math.max(1, (newQuantities[index] || 1) + delta)
-        setQuantities(newQuantities)
-        setValue(`products.${index}.quantity`, newQuantities[index])
-    }
-
     return (
         <div className="flex items-center gap-4 bg-gray-50 p-4 rounded-lg shadow-sm">
             <select
@@ -58,7 +47,7 @@ export default function ProductField({
                         required: 'La cantidad es requerida',
                         min: { value: 1, message: 'La cantidad debe ser al menos 1' },
                     })}
-                    value={quantities[index] || 1}
+                    value={quantity}
                     type="number"
                     className="w-12 text-center p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
                     readOnly
@@ -74,7 +63,7 @@ export default function ProductField({
 
             <button
                 type="button"
-                onClick={() => removeProduct(index)}
+                onClick={() => remove(index)}
                 className="text-red-600 hover:text-red-800 focus:outline-none"
             >
                 <Trash className="w-5 h-5" />

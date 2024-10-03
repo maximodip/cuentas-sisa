@@ -1,56 +1,50 @@
 'use client'
 
 import { useForm, useFieldArray } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
 import { PlusIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useContext } from 'react'
 import ProductField from '@/components/ProductField'
-import { useOrderContext } from '@/context/OrderContext' // Importa el contexto
+import { useOrderContext } from '@/context/OrderContext'
+import { toast } from 'react-hot-toast'
 
 export default function NewOrder() {
   const router = useRouter()
 
-  // Extraer los valores del contexto
-  const {
-    products,
-    loading,
-    createOrder,
-    addProduct,
-    removeProduct,
-    updateQuantity,
-    quantities,
-  } = useOrderContext()
+  // Extraer las funciones y estado del contexto
+  const { products, quantities, updateQuantity, createOrder } = useOrderContext()
 
-  const {
-    control,
-    handleSubmit,
-    register,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm({
+  const { control, handleSubmit, register, reset, setValue, formState: { errors } } = useForm({
     defaultValues: {
       customer_name: '',
       products: [{ product_id: '', product_name: '', product_price: 0, quantity: 1 }],
     },
   })
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: 'products',
   })
 
+  // Función para manejar el cambio de cantidad
+  const handleQuantityChange = (index, delta) => {
+    const newQuantity = (quantities[index] || 1) + delta;
+    updateQuantity(index, newQuantity);  // Actualiza el contexto con la nueva cantidad
+    setValue(`products.${index}.quantity`, newQuantity); // También actualiza en el form
+  };
 
+  const handleAddProduct = () => {
+    append({ product_id: '', product_name: '', product_price: 0, quantity: 1 })
+    updateQuantity(fields.length, 1)
+  }
 
   const onSubmit = async (data) => {
     try {
-      await createOrder(data) // Usa la función createOrder del contexto
+      await createOrder(data)
       router.push('/')
       reset()
       toast.success('Cuenta creada')
     } catch (error) {
-      toast.error(error?.response?.data?.error || 'Error al crear la cuenta')
+      toast.error('Error al crear la cuenta')
     }
   }
 
@@ -82,12 +76,12 @@ export default function NewOrder() {
                 index={index}
                 product={field}
                 products={products}
-                quantities={quantities}
-                setQuantities={updateQuantity}  // Llama al updateQuantity del contexto
+                quantity={quantities[index] || 1}  // Pasar la cantidad del contexto
+                handleQuantityChange={handleQuantityChange} // Pasar la función de cambio
                 register={register}
                 setValue={setValue}
                 errors={errors}
-                remove={() => removeProduct(index)}  // Usa removeProduct del contexto
+                remove={remove}
               />
             ))}
           </div>
@@ -95,7 +89,7 @@ export default function NewOrder() {
           <div className="flex justify-between items-center">
             <button
               type="button"
-              onClick={() => append({ product_id: '', product_name: '', product_price: 0, quantity: 1 })}
+              onClick={handleAddProduct}
               className="flex items-center px-4 py-2 bg-sky-600 text-white rounded-md shadow hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50"
             >
               Agregar Producto <PlusIcon className="ml-2" />

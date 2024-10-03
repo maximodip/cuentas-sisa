@@ -672,11 +672,11 @@ video {
 .max-w-screen-lg {
   max-width: 1024px;
 }
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
 .flex-col {
   flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
 }
 .place-content-center {
   place-content: center;
@@ -1094,6 +1094,10 @@ input {
 }
 
 @media (min-width: 640px) {
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
   .sm\:text-sm {
     font-size: 0.875rem;

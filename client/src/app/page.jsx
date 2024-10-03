@@ -23,6 +23,7 @@ export default function Home() {
     setLoading(true)
     try {
       const response = await axios.get('http://localhost:8000/orders') // Adjust the URL to match your backend endpoint
+      console.log(response.data)
       setOrders(response.data)
       setFilteredData(response.data)
       setLoading(false)
@@ -70,7 +71,7 @@ export default function Home() {
       <div className='w-full mb-8'>
         <SearchInput value={searchTerm} onChange={handleSearch} />
       </div>
-      <div className='grid grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-3 xl:grid-cols-4'>
+      <div className='grid sm:grid-cols-2 gap-x-6 gap-y-2 md:grid-cols-3 xl:grid-cols-4'>
         {loading && <p>Cargando...</p>}
 
         {filteredData.map((order, index) => (
@@ -90,7 +91,7 @@ export default function Home() {
             </p>
             <p className='text-green-600'>Total: {order.total}</p>
             <p className='opacity-70'>
-              {moment(order.created_date).format('DD/MM/YYYY')}
+              {moment.utc(order.created_date).local().format('YYYY-MM-DD')}
             </p>
             <div className='flex items-center gap-x-2'>
               <Link

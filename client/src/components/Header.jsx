@@ -16,7 +16,7 @@ export default function Header() {
                     <h1 className='font-semibold'>Cuentas Sisa</h1>
                 </div>
             </header>
-            <nav className='flex items-center mx-auto max-w-screen-lg justify-around mt-4'>
+            <nav className='flex items-center mx-auto max-w-screen-lg justify-around mt-4 flex-wrap'>
                 <Link
                     href='/'
                     className='flex items-center text-xl hover:underline gap-x-2'
